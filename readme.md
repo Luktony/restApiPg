@@ -138,7 +138,36 @@ do projeto)
 npm start
 
 //Agora pode criar suas Rotas/routes/endPoints desejados
+//Exemplo de rota simples:
 
+app.get("/usuarios", (req, res) => {
+  try {
+    client.query("SELECT * FROM Usuarios", function(err, result) {
+      if (err) {
+        return console.error("Erro ao executar a qry de SELECT", err);
+      }
+      res.send(result.rows);
+      console.log("Rota: get usuarios");
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+Esta rota /usuarios faz o seguinte:
+
+Requisição GET:
+
+Quando uma requisição GET é feita ao caminho /usuarios, o servidor executa a lógica definida no callback.
+Execução da Consulta SQL:
+
+O servidor tenta executar a consulta SQL SELECT * FROM Usuarios para selecionar todos os registros da tabela Usuarios.
+Tratamento de Erros:
+
+Se ocorrer um erro durante a execução da consulta, a mensagem de erro é registrada no console e a execução é interrompida.
+Envio da Resposta:
+
+Se a consulta for bem-sucedida, os resultados da consulta (registros da tabela Usuarios) são enviados como resposta à requisição.
+Uma mensagem de log é registrada no console indicando que a rota /usuarios foi acessada e a consulta foi executada.
 
 
 
