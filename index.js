@@ -30,6 +30,20 @@ app.get("/", (req, res) => {
     console.log("Response ok.");
     res.send("Ok – Servidor disponível.");
   });
+
+  app.get("/usuarios", (req, res) => {
+    try {
+      client.query("SELECT * FROM Usuarios", function(err, result) {
+        if (err) {
+          return console.error("Erro ao executar a qry de SELECT", err);
+        }
+        res.send(result.rows);
+        console.log("Rota: get usuarios");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
   
   
   
